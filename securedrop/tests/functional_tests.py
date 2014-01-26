@@ -6,6 +6,7 @@ import shutil
 import os
 import gnupg
 import urllib2
+import platform
 
 os.environ['SECUREDROP_ENV'] = 'test'
 import config
@@ -22,6 +23,11 @@ class SubmitAndRetrieveHappyPath(unittest.TestCase):
         port = s.getsockname()[1]
         s.close()
         return port
+
+    def _phantomjs_binary_path(self):
+        system = platform.system()
+        arch = platform.machine()
+        return os.path.join('./tests', 'phantomjs', system, arch, 'phantomjs')
 
     def setUp(self):
         test_setup.create_directories()
@@ -50,7 +56,7 @@ class SubmitAndRetrieveHappyPath(unittest.TestCase):
         self.source_process.start()
         self.journalist_process.start()
 
-        self.driver = webdriver.PhantomJS()
+        self.driver = webdriver.PhantomJS(executable_path = self._phantomjs_binary_path())
 
         self.secret_message = 'blah blah blah'
 
