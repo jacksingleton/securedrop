@@ -105,6 +105,23 @@ def delete_collection(source_id):
     db_session.delete(source)
     db_session.commit()
 
+from threading import Thread
+import time
+import datetime
+
+to_delete = []
+
+def delayed_delete(source_id):
+#    class DeletingThread(Thread):
+#        def run(self):
+#            time.sleep(60)
+#            delete_collection(source_id)
+
+    to_delete.append((source_id, datetime.datetime.now()))
+
+    #thread = DeletingThread()
+    #thread.start()
+
 
 @app.route('/col/delete', methods=('POST',))
 def col_delete():
