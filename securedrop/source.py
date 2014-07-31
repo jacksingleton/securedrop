@@ -249,6 +249,8 @@ def submit():
     db_session.commit()
     normalize_timestamps(g.sid)
 
+    import zerome; zerome.zerome_unicode_string(msg)
+
     return redirect(url_for('lookup'))
 
 
