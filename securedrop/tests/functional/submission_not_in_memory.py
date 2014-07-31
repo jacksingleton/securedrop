@@ -43,16 +43,16 @@ class SubmissionNotInMemoryTest(TestCase, FunctionalTest, SourceNavigationSteps)
 
         self.assertLess(secrets_in_memory, 1)
 
-    #def test_file_upload_is_not_retained_in_memory(self):
-    #    self._source_visits_source_homepage()
-    #    self._source_chooses_to_submit_documents()
-    #    self._source_continues_to_submit_page()
-    #    self._source_submits_a_file()
+    def test_file_upload_is_not_retained_in_memory(self):
+        self._source_visits_source_homepage()
+        self._source_chooses_to_submit_documents()
+        self._source_continues_to_submit_page()
+        self._source_submits_a_file()
 
-    #    source_server_pid = str(self.source_process.pid)
+        source_server_pid = str(self.source_process.pid)
 
-    #    memory_dump = self._memory_dump(source_server_pid)
-    #    secrets_in_memory = self._num_strings_in(self.secret_message, memory_dump)
+        memory_dump = self._memory_dump(source_server_pid)
+        secrets_in_memory = self._num_strings_in(self.secret_message, memory_dump)
 
-    #    self.assertLess(secrets_in_memory, 1)
+        self.assertLess(secrets_in_memory, 1)
 
