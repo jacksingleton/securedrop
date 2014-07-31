@@ -13,7 +13,7 @@ class TestZerome(unittest.TestCase):
     def test_zerome_works_for_unicode_strings(self):
         secret_string = u"super secret stuff"
 
-        zerome.zerome_unicode_string(secret_string)
+        zerome.zerome_string(secret_string)
 
         self.assertEquals(secret_string, '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
 

@@ -2,6 +2,14 @@ import ctypes
 import sys
 
 def zerome_string(string):
+    if type(string) == str:
+        _zerome_byte_string(string)
+    elif type(string) == unicode:
+        _zerome_unicode_string(string)
+    else:
+        raise TypeError
+
+def _zerome_byte_string(string):
     '''Remove the contents of a string object from memory.
     Derived from: http://web.archive.org/web/20100929111257/http://www.codexon.com/posts/clearing-passwords-in-memory-with-python
     '''
@@ -56,7 +64,7 @@ def _unicode_bytes_per_char():
     except ValueError:
         return 2 # thin build -> UCS2 -> 2 bytes
 
-def zerome_unicode_string(string):
+def _zerome_unicode_string(string):
     string_pointer = ctypes.c_void_p(id(string))
     c_type = ctypes.POINTER(_PyUnicodeObjectStruct)
     string_struct = ctypes.cast(string_pointer, c_type).contents
